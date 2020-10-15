@@ -27,9 +27,8 @@ const UpdateMovie = (props) => {
 
     const submitHandler = (event) => {
         axios.put(`http://localhost:9999/api/movies/${id}`, movie)
-        .then(response => console.log("put response: ", response))
+        .then(response => history.push(`/`))
         .catch(error=> console.log(error))
-        .finally( history.push(`/movies/${id}`))
     }
     return (
         <div>

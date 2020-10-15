@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -11,8 +12,14 @@ const MovieCard = props => {
     history.push(`/update-movie/${id}`)
   }
 
-  const deleteMovie = () => {
-    // axios delete 
+  const deleteMovie = (event) => {
+    // axios delete req
+    axios.delete(`http://localhost:9999/api/movies/${id}`)
+    .then(response => props.setMovieList(response.data), history.push("/"))
+    .catch(err => console.log(err))
+    //update state in APp
+
+    //handle user experience
     history.push(`/`)
   }
  
