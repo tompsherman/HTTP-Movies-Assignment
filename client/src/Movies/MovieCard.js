@@ -1,7 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const MovieCard = props => {
-  const { title, director, metascore, stars } = props.movie;
+  const history = useHistory()
+  const { id, title, director, metascore, stars } = props.movie;
+  
+  console.log(props)
+
+  const editMovie = () => {
+    history.push(`/update-movie/${id}`)
+  }
+
+  const deleteMovie = () => {
+    // axios delete 
+    history.push(`/`)
+  }
+ 
   return (
     <div className="movie-card">
       <h2>{title}</h2>
@@ -18,6 +32,11 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
+      <br></br>
+      <button onClick={editMovie}>edit movie</button>
+      <br></br>
+      <button onClick={deleteMovie}>DELETE</button>
+
     </div>
   );
 };
