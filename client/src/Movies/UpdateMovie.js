@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import axios from "axios"
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 
 const initialValues = {
@@ -11,6 +11,7 @@ const initialValues = {
 }
 
 const UpdateMovie = (props) => {
+    const history = useHistory()
     const {id} = useParams()
     const [movie, setMovie] = useState(initialValues)
     
@@ -25,7 +26,10 @@ const UpdateMovie = (props) => {
     }
 
     const submitHandler = (event) => {
-
+        axios.put(`http://localhost:9999/api/movies/${id}`, movie)
+        .then(response => console.log("put response: ", response))
+        .catch(error=> console.log(error))
+        .finally( history.push(`/movies/${id}`))
     }
     return (
         <div>
