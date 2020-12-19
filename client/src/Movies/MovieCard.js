@@ -6,7 +6,7 @@ const MovieCard = props => {
   const history = useHistory()
   const { id, title, director, metascore, stars } = props.movie;
   
-  console.log(props)
+  console.log("movie card props: ", props)
 
   const editMovie = () => {
     history.push(`/update-movie/${id}`)
@@ -15,7 +15,7 @@ const MovieCard = props => {
   const deleteMovie = (event) => {
     // axios delete req
     axios.delete(`http://localhost:9999/api/movies/${id}`)
-    .then(response => props.setMovieList(response.data), history.push("/"))
+    .then(response => props.movieList.map(response.data === props.movie.id? response.data: props.movie), history.push("/"))
     .catch(err => console.log(err))
     //update state in APp
 
